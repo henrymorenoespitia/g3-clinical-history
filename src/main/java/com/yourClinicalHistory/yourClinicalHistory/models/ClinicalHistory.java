@@ -12,7 +12,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClinicalHistory {
-
     @Id
     private String id;
     private Date appointmentData;
