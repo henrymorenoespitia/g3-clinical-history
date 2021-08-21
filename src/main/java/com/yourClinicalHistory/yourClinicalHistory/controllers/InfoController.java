@@ -39,21 +39,21 @@ public class InfoController {
      */
   @PostMapping("/api/v1/patient/info")
     public Info createNewPatient(@RequestBody Info info  ){
-        var saveRespons = infoRepositories.findByDni( info.getDni() );
-        if ( saveRespons.isEmpty() )
+        var saveRespons = this.infoRepositories.findByDni( info.getDni() );
+        if ( ! saveRespons.isEmpty() )
             throw  new UserAlreadyExistException(" User already exist, no repeat.");
-        return infoRepositories.save(info);
+        return this.infoRepositories.save(info);
     }
 
 
     @PutMapping("/api/v1/patient/info")
     public Info updatePatient(@RequestBody Info info ){
 
-      var saveResponse = infoRepositories.findByDni(info.getDni() ) ;
-        if ( ! saveResponse.isEmpty() )
-            return infoRepositories.save(info);
-        throw  new InfoNotFoundException(" User not found. Check information");
+      var saveResponse = this.infoRepositories.findByDni(info.getDni() ) ;
+        if (  saveResponse.isEmpty() )
+            return this.infoRepositories.save(info);
 
+        throw  new InfoNotFoundException(" User not found. Check information");
     }
 
 
