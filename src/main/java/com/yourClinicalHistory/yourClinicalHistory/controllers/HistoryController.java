@@ -34,9 +34,13 @@ public class HistoryController {
     }
 
 
-    @PostMapping("api/v1/patient/appointment/new/{dni}")
-    public History createNewRegistry(@RequestBody History historyRequest ){
-        var saveResponse =  historyRepositories.save(historyRequest);
+    @PostMapping("api/v1/patient/appointment/new/{dni}/{rol}")
+    public History createNewRegistry(@RequestBody History historyRequest , @PathVariable Boolean isDoctor ){
+        History saveResponse = null;
+        if(isDoctor) {
+            saveResponse = historyRepositories.save(historyRequest);
+        }
+        
         return saveResponse;
     }
 

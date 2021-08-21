@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface InfoRepositories extends MongoRepository<Info,String> {
-    List<Info> findByDni(String Dni);
+    List<Info> findByDni(String dni);
 
 }
