@@ -35,7 +35,7 @@ public class HistoryController {
         return responseHistory;
     }
 
-    @PostMapping("api/v1/patient/appointment/new")
+    @PostMapping("/api/v1/patient/appointment/new")
     public History createNewRegistry(@RequestBody History historyRequest) {
         History saveResponse = null;
         saveResponse = historyRepositories.save(historyRequest);
