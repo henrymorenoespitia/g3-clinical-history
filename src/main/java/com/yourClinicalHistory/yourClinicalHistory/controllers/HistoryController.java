@@ -17,32 +17,30 @@ public class HistoryController {
 
     public HistoryController(HistoryRepositories historyRepositories) {
         this.historyRepositories = historyRepositories;
-    History newHistory1 = new History("001","123456789","El paciente declara un dolor de espalda","ibuprofenno y descanso de dos dias","Jose Perez", new Date());
-    this.historyRepositories.save(newHistory1);
+        History newHistory1 = new History("001", "123456789", "El paciente declara un dolor de espalda",
+                "ibuprofenno y descanso de dos dias", "Jose Perez", new Date());
+        this.historyRepositories.save(newHistory1);
     }
 
     @GetMapping("/api/v1/patient/history/{dni}")
-    List<History> userHistory(@PathVariable String dni){
-        var userHistory = historyRepositories.findById(dni );//.orElse(null);
-        //var theHistory = historyRepositories.findById(dni);
+    List<History> userHistory(@PathVariable String dni) {
+        var userHistory = historyRepositories.findById(dni);// .orElse(null);
+        // var theHistory = historyRepositories.findById(dni);
         var responseHistory = historyRepositories.findByDni(dni);
         System.out.println("userHistory" + responseHistory.toString());
         if (userHistory == null)
             throw new HistoryNotFoundException("No se encontro una cuenta con el userId: " + dni);
-        //List<History> transactions = Stream.concat(transactionsOrigin.stream(), transactionsDestiny.stream()).collect(Collectors.toList());
+        // List<History> transactions = Stream.concat(transactionsOrigin.stream(),
+        // transactionsDestiny.stream()).collect(Collectors.toList());
         return responseHistory;
     }
 
-
-    @PostMapping("api/v1/patient/appointment/new/{dni}/{rol}")
-    public History createNewRegistry(@RequestBody History historyRequest , @PathVariable Boolean isDoctor ){
+    @PostMapping("api/v1/patient/appointment/new")
+    public History createNewRegistry(@RequestBody History historyRequest) {
         History saveResponse = null;
-        if(isDoctor) {
-            saveResponse = historyRepositories.save(historyRequest);
-        }
-        
+        saveResponse = historyRepositories.save(historyRequest);
+
         return saveResponse;
     }
-
 
 }
